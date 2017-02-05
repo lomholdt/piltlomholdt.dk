@@ -15,3 +15,6 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'WeddingController@index');
+Route::post('/home', 'WeddingController@create');
+
+Route::post('/rsvp/store', 'RsvpController@store');

@@ -75,6 +75,7 @@ p {
 }
 
 .error {
+	text-align: center;
 
 }
 
@@ -146,6 +147,11 @@ p {
 
 }
 
+.message {
+	font-size: 35px;
+	text-shadow: 0px 0px;
+}
+
 #footer {
 	font-size: 18px;
 	background-color: lightgrey;
@@ -166,6 +172,8 @@ p {
 }
 
 #map {
+	padding-top: 0;
+	height: 100%;
 	min-height: 450px;
 }
 

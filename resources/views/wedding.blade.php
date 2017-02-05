@@ -5,9 +5,14 @@
     <div class="container-fluid" id="main-container">
 
         @include('layouts.nav')
-    
+
         <div class="row" id="hero">
             <div class="col-xs-offset-2 col-sm-offset-2 col-sm-8 main-title">
+                @if (session('message'))
+                <div class="alert alert-success message">
+                    {{ session('message') }}
+                </div>
+                @endif
                 <h1>Camilla &amp; André</h1>
                 <h2>19. august 2017</h2>
             </div>
@@ -146,27 +151,54 @@
     <div class="row" id="rsvp">
         <div class="col-md-8 col-md-offset-2">
             <h1>RSVP</h1>
-            <form>
+
+            @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+
+            <form action="/rsvp/store" method="POST">
+              {{ csrf_field() }}
               <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="">
-              </div>
-              <div class="form-group">
+                <input type="email" class="form-control" id="email" placeholder="" name="email" required>
+            </div>
+            <div class="form-group">
                 <label for="navn">Navn</label>
-                <input type="text" class="form-control" id="navn" placeholder="">
-              </div>
-              <div class="form-group">
-                <label for="besked">Besked</label>
-                <textarea class="form-control" id="besked" rows="5" placeholder=""></textarea>
-              </div>
-              <button type="submit" class="btn btn-default">Send</button>
-            </form>
+                <input type="text" class="form-control" id="navn" placeholder="" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="">Kan i komme?</label>
+              <div class="checkbox">
+                  <label>
+                    <input type="radio" name="is_comming" id="yes" value="1" required>
+                    Ja
+                </label>
+            </div>
+            <div class="checkbox">
+              <label>  
+                <input type="radio" name="is_comming" id="no" value="0">
+                Nej
+            </label>
         </div>
     </div>
-    <div class="row" id="footer">
-        <div>
-            #piltlomholdt2017
-        </div>
+    <div class="form-group">
+        <label for="besked">Besked</label>
+        <textarea class="form-control" id="besked" rows="5" name="message" placeholder=""></textarea>
     </div>
+    <button type="submit" class="btn btn-default">Send</button>
+</form>
+</div>
+</div>
+<div class="row" id="footer">
+    <div>
+        #piltlomholdt2017
+    </div>
+</div>
 </div>
 @endsection
