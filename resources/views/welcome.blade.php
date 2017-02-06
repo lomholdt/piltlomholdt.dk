@@ -16,7 +16,7 @@
 				<form action="/home" method="GET">
 					<input type="text" name="auth" class="form-control" placeholder="Kode">
 					<div class="submit-button">
-						<button type="submit" class="btn">Log ind</button>
+						<button type="submit" class="btn btn-success">Log ind</button>
 					</div>
 				</form>
 			</div>

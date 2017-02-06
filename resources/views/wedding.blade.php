@@ -7,11 +7,11 @@
         @include('layouts.nav')
 
         <div class="row" id="hero">
-            <div class="col-xs-offset-2 col-sm-offset-2 col-sm-8 main-title">
-                @if (session('message'))
-                <div class="alert alert-success message">
-                    {{ session('message') }}
-                </div>
+            <div class="col-xs-offset-1 col-sm-offset-2 col-sm-8  col-xs-10 main-title">
+                @if (session('rsvp-message'))
+                    <div class="alert alert-success message">
+                        {{ session('rsvp-message') }}
+                    </div>
                 @endif
                 <h1>Camilla &amp; André</h1>
                 <h2>19. august 2017</h2>
@@ -65,6 +65,23 @@
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae ab blanditiis iure incidunt error aperiam, asperiores consequuntur quibusdam labore accusamus possimus quo repellendus libero. Dolorum praesentium eaque eum, porro minus?
             </p>
+            <hr>
+            <h3>Ønsk en sang til festen</h3>
+            @if (session('song-message'))
+                <div class="alert alert-success message">
+                    {{ session('song-message') }}
+                </div>
+            @endif
+            <form action="/songs/store" method="POST">
+                {{ csrf_field() }}
+                <div class="form-group">
+                    <input type="text" class="form-control" name="artist" placeholder="Kunstner" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="name"  placeholder="Sangtitel" required>
+                </div>
+                <button type="submit" class="btn btn-success">Ønsk Sangen</button>
+            </form>
         </div>
     </div>
     <div class="row" id="overnatning">
@@ -102,17 +119,20 @@
         </div>
     </div>
     <div class="row colored-row" id="ønsker">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-10 col-md-offset-2">
             <h1>Ønsker</h1>
             <ul>
-                <li>blablabla</li>
-                <li>blablabla</li>
-                <li>blablabla</li>
-                <li>blablabla</li>
-                <li>blablabla</li>
-                <li>blablabla</li>
-                <li>blablabla</li>
-                <li>blablabla</li>
+            @if(isset($wishes))
+                @foreach($wishes as $wish)
+                    <div class="col-xs-12 col-md-3">
+                        <h4 class="wish-name">{{ $wish->name }}</h4>
+                        @if(strlen($wish->link) > 0)
+                            <span> - </span><a href="{{ $wish->link }}" target="_blank">Link</a>
+                        @endif
+                        <p class="wish-description">{{ $wish->description }}</p>
+                    </div>
+                @endforeach
+            @endif
             </ul>
         </div>
     </div>
@@ -152,15 +172,7 @@
         <div class="col-md-8 col-md-offset-2">
             <h1>RSVP</h1>
 
-            @if (count($errors) > 0)
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif
+            @include('errors')
 
             <form action="/rsvp/store" method="POST">
               {{ csrf_field() }}

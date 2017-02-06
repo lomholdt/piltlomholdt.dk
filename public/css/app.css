@@ -65,6 +65,14 @@ p {
   text-align: center;
 }
 
+input {
+  font-family: 'Roboto';
+}
+
+.btn {
+  font-family: 'Roboto';
+}
+
 .submit-button {
   margin-top: 20px;
   text-align: center;
@@ -128,9 +136,26 @@ p {
   min-width: 100%;
 }
 
+.wish-name {
+  display: inline-block;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.button-group {
+  width: 140px;
+}
+
+.wish-description {
+  word-wrap: break-word;
+}
+
 .message {
   font-size: 35px;
   text-shadow: 0px 0px;
+  font-family: 'Roboto';
 }
 
 #footer {

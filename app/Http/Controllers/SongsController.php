@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Song;
 
-use App\Rsvp;
-
-class RsvpController extends Controller
+class SongsController extends Controller
 {
 
-
+    
     public function __construct()
     {
         $this->middleware('auth', ['only' => ['index']]);
@@ -22,9 +21,10 @@ class RsvpController extends Controller
      */
     public function index()
     {
-        $rsvps = Rsvp::all();
 
-        return view('rsvps.index', compact('rsvps'));
+        $songs = Song::all();
+
+        return view('songs.index', compact('songs'));
     }
 
     /**
@@ -43,28 +43,25 @@ class RsvpController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
-        $rsvp = new Rsvp;
+        $song = new Song;
 
         $this->validate(
             request(), 
             [
-                'email' => 'required',
-                'name' => 'required',
-                'is_comming' => 'required'
+                'artist' => 'required',
+                'name' => 'required'
             ]
         );
 
-        $rsvp->email = request('email');
-        $rsvp->name = request('name');
-        $rsvp->is_comming = request('is_comming');
-        $rsvp->message = request('message');
-        $rsvp->save();
+        $song->artist = request('artist');
+        $song->name = request('name');
+        $song->save();
 
-        session()->flash('rsvp-message', 'Tak for din tilmelding');
+        session()->flash('song-message', 'Dit musikønske er blevet registreret, ønsk gerne flere.');
 
-        return redirect('/home?auth=piltlomholdt2017');
+        return redirect('/home?auth=piltlomholdt2017#festen');
     }
 
     /**

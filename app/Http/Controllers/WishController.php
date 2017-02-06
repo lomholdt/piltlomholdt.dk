@@ -3,16 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Wish;
 
-use App\Rsvp;
-
-class RsvpController extends Controller
+class WishController extends Controller
 {
 
 
     public function __construct()
     {
-        $this->middleware('auth', ['only' => ['index']]);
+        $this->middleware('auth');
     }
 
     /**
@@ -22,9 +21,9 @@ class RsvpController extends Controller
      */
     public function index()
     {
-        $rsvps = Rsvp::all();
+        $wishes = Wish::all();
 
-        return view('rsvps.index', compact('rsvps'));
+        return view('wishes.index', compact('wishes'));
     }
 
     /**
@@ -34,7 +33,7 @@ class RsvpController extends Controller
      */
     public function create()
     {
-        //
+        return view('wishes.create');
     }
 
     /**
@@ -43,28 +42,25 @@ class RsvpController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
-        $rsvp = new Rsvp;
+        $wish = new Wish;
 
         $this->validate(
-            request(), 
+            request(),
             [
-                'email' => 'required',
                 'name' => 'required',
-                'is_comming' => 'required'
             ]
         );
 
-        $rsvp->email = request('email');
-        $rsvp->name = request('name');
-        $rsvp->is_comming = request('is_comming');
-        $rsvp->message = request('message');
-        $rsvp->save();
+        $wish->name = request('name');
+        $wish->description = request('description');
+        $wish->link = request('link');
+        $wish->save();
 
-        session()->flash('rsvp-message', 'Tak for din tilmelding');
+        session()->flash('wish-message', 'Dit ønske er gemt');
 
-        return redirect('/home?auth=piltlomholdt2017');
+        return redirect('/wishes/index');
     }
 
     /**
@@ -86,7 +82,8 @@ class RsvpController extends Controller
      */
     public function edit($id)
     {
-        //
+        $wish = Wish::find($id);
+        return view('wishes.edit', compact('wish'));
     }
 
     /**
@@ -98,7 +95,23 @@ class RsvpController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $wish = Wish::find($id);
+
+        $this->validate(
+            request(), 
+            [
+                'name' => 'required',
+            ]
+        );
+
+        $wish->name = request('name');
+        $wish->description = request('description');
+        $wish->link = request('link');
+        $wish->save();
+
+        session()->flash('wish-message', 'Dit ønske er opdateret');
+
+        return redirect('/wishes/index');
     }
 
     /**
@@ -109,6 +122,7 @@ class RsvpController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Wish::destroy($id);
+        return redirect('/wishes/index')->with('message', 'Dit ønske blev slettet');
     }
 }

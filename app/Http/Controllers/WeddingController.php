@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Wish;
 
 class WeddingController extends Controller
 {
@@ -14,7 +15,8 @@ class WeddingController extends Controller
     public function index(Request $request)
     {
         if($request->auth === 'piltlomholdt2017') {
-        	return view('wedding');
+        	$wishes = Wish::all();
+        	return view('wedding', compact('wishes'));
         }
         return redirect('/')->with('error', 'Du har desværre ikke tilladelse til at se denne side.');
     }
