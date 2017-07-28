@@ -52,13 +52,15 @@ class RsvpController extends Controller
             [
                 'email' => 'required',
                 'name' => 'required',
-                'is_comming' => 'required'
+                'is_comming' => 'required',
+                'is_sleeping' => 'required'
             ]
         );
 
         $rsvp->email = request('email');
         $rsvp->name = request('name');
         $rsvp->is_comming = request('is_comming');
+        $rsvp->is_sleeping = request('is_sleeping');
         $rsvp->message = request('message');
         $rsvp->save();
 

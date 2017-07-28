@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 body {
   font-family: 'Roboto';
   padding-top: 50px;
@@ -10,6 +12,10 @@ nav {
 div > .row {
   padding-top: 40px;
   padding-bottom: 40px;
+}
+
+.row {
+  min-height: 200px;
 }
 
 .colored-row {
@@ -128,6 +134,10 @@ input {
   min-height: 450px;
 }
 
+#ønsker {
+  padding-bottom: 50px;
+}
+
 #toastmaster {
   min-height: 400px;
 }
@@ -136,8 +146,20 @@ input {
   min-width: 100%;
 }
 
+#rsvp {
+  margin-bottom: 50px;
+}
+
 .wish-name {
-  display: inline-block;
+  display: inline;
+}
+
+.wish {
+  margin-top: 30px;
+}
+
+.wish-row {
+  border-bottom: 1px solid lightgrey;
 }
 
 .align-right {
@@ -150,6 +172,7 @@ input {
 
 .wish-description {
   word-wrap: break-word;
+  font-weight: 100;
 }
 
 .message {
@@ -162,6 +185,7 @@ input {
   font-size: 18px;
   background-color: lightgrey;
   text-align: center;
+  padding-top: 20px;
 }
 
 .gold {

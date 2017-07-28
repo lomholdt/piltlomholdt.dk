@@ -14,7 +14,7 @@
 				</div>
 				@endif
 				<form action="/home" method="GET">
-					<input type="text" name="auth" class="form-control" placeholder="Kode">
+					<input type="text" name="auth" class="form-control" placeholder="Kode" value="{{ session('auth') }}">
 					<div class="submit-button">
 						<button type="submit" class="btn btn-success">Log ind</button>
 					</div>

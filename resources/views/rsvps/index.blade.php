@@ -15,7 +15,7 @@
 	@foreach($rsvps as $rsvp)
 		<div class="col-xs-4">
 			<h3>{{ $rsvp->email }}</h3>
-			<p>{{ $rsvp->name }} {{ $rsvp->is_comming ? 'kommer' : 'kommer ikke' }}</p>
+			<p>{{ $rsvp->name }} {{ $rsvp->is_comming ? 'kommer' : 'kommer ikke' }} og vil {{ $rsvp->is_sleeping ? 'gerne' : 'ikke' }} overnatte.</p>
 			<p><i>{{ $rsvp->message }}</i></p>
 			<p>{{ $rsvp->created_at }}</p>
 

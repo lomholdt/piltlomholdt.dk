@@ -12,6 +12,10 @@ div > .row {
 	padding-bottom: 40px;
 }
 
+.row {
+	min-height: 200px;
+}
+
 .colored-row {
     background-color: rgba(36, 197, 115, 0.15);
 }
@@ -135,6 +139,7 @@ input {
 }
 
 #ønsker {
+	padding-bottom: 50px;
 
 }
 
@@ -152,11 +157,20 @@ input {
 }
 
 #rsvp {
+	margin-bottom: 50px;
 
 }
 
 .wish-name {
-	display: inline-block;
+	display: inline;
+}
+
+.wish {
+	margin-top: 30px;
+}
+
+.wish-row {
+	border-bottom: 1px solid lightgrey;
 }
 
 .align-right {
@@ -169,6 +183,7 @@ input {
 
 .wish-description {
 	word-wrap: break-word;
+	font-weight: 100;
 }
 
 .message {
@@ -181,6 +196,7 @@ input {
 	font-size: 18px;
 	background-color: lightgrey;
 	text-align: center;
+	padding-top: 20px;
 }
 
 .gold {

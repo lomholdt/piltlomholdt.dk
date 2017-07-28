@@ -14,10 +14,10 @@ class WeddingController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->auth === 'piltlomholdt2017') {
+        if(strtolower($request->auth) === 'piltlomholdt2017') {
         	$wishes = Wish::all();
         	return view('wedding', compact('wishes'));
         }
-        return redirect('/')->with('error', 'Du har desværre ikke tilladelse til at se denne side.');
+        return redirect('/')->with('error', 'Du har desværre ikke tilladelse til at se denne side.')->with('auth', $request->auth);
     }
 }

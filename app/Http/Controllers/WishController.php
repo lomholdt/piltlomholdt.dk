@@ -83,6 +83,7 @@ class WishController extends Controller
     public function edit($id)
     {
         $wish = Wish::find($id);
+
         return view('wishes.edit', compact('wish'));
     }
 
